@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	cloud.google.com/go/pubsub v1.28.0
-	github.com/jimmykodes/gommand v0.6.0
+	github.com/jimmykodes/gommand v0.6.2
 	google.golang.org/api v0.105.0
 )
 

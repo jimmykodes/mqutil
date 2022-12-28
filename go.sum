@@ -53,8 +53,8 @@ github.com/googleapis/enterprise-certificate-proxy v0.2.0 h1:y8Yozv7SZtlU//QXbez
 github.com/googleapis/enterprise-certificate-proxy v0.2.0/go.mod h1:8C0jb7/mgJe/9KK8Lm7X9ctZC2t60YyIpYEI16jx0Qg=
 github.com/googleapis/gax-go/v2 v2.7.0 h1:IcsPKeInNvYi7eqSaDjiZqDDKu5rsmunY0Y1YupQSSQ=
 github.com/googleapis/gax-go/v2 v2.7.0/go.mod h1:TEop28CZZQ2y+c0VxMUmu1lV+fQx57QpBWsYpwqHJx8=
-github.com/jimmykodes/gommand v0.6.0 h1:YBe7TIFX7laIS1SUrkn/kGNgd+99d3uJa0l8u1jYPs8=
-github.com/jimmykodes/gommand v0.6.0/go.mod h1:9mcGnQhdNAXOHQ2VGd/TXwiGZKOJJDx5qD6aoX3uneI=
+github.com/jimmykodes/gommand v0.6.2 h1:gYfJaE9cWp1dqX7lWasfffwfE9tyf1QkVFAc9c8u/cw=
+github.com/jimmykodes/gommand v0.6.2/go.mod h1:9mcGnQhdNAXOHQ2VGd/TXwiGZKOJJDx5qD6aoX3uneI=
 github.com/jimmykodes/strman v0.0.0-20211118230750-cbb708c87cdf h1:VUkD82TbudKaxGujj31u7c52HGr7fPRRG2wu9rsqqCU=
 github.com/jimmykodes/strman v0.0.0-20211118230750-cbb708c87cdf/go.mod h1:mXm29iIVETp94o/S9g+f+IAufbWILx8G11LlnT1ZrFc=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
