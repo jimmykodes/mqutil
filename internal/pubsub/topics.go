@@ -7,6 +7,8 @@ import (
 	"cloud.google.com/go/pubsub"
 	"github.com/jimmykodes/gommand"
 	"google.golang.org/api/iterator"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 var (
@@ -53,6 +55,10 @@ func listTopics(ctx *gommand.Context, client *pubsub.Client) error {
 func createTopics(ctx *gommand.Context, client *pubsub.Client) error {
 	for _, t := range ctx.Args() {
 		topic, err := client.CreateTopic(ctx, t)
+		if s, ok := status.FromError(err); ok && s.Code() == codes.AlreadyExists {
+			fmt.Println("topic already exists")
+			return nil
+		}
 		if err != nil {
 			fmt.Println("error creating topic", t)
 			return err
