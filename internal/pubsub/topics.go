@@ -3,6 +3,7 @@ package pubsub
 import (
 	"errors"
 	"fmt"
+	"strings"
 
 	"cloud.google.com/go/pubsub"
 	"github.com/jimmykodes/gommand"
@@ -54,16 +55,32 @@ func listTopics(ctx *gommand.Context, client *pubsub.Client) error {
 }
 func createTopics(ctx *gommand.Context, client *pubsub.Client) error {
 	for _, t := range ctx.Args() {
-		topic, err := client.CreateTopic(ctx, t)
+		topicName, subscriptions, found := strings.Cut(t, ":")
+		topic, err := client.CreateTopic(ctx, topicName)
 		if s, ok := status.FromError(err); ok && s.Code() == codes.AlreadyExists {
 			fmt.Println("topic already exists")
-			return nil
-		}
-		if err != nil {
+			topic = client.Topic(topicName)
+		} else if err != nil {
 			fmt.Println("error creating topic", t)
 			return err
+		} else {
+			fmt.Println("created topic", topic.String())
 		}
-		fmt.Println("created topic", topic.String())
+
+		if found {
+			for _, sub := range strings.Split(subscriptions, ";") {
+				subscription, err := client.CreateSubscription(ctx, sub, pubsub.SubscriptionConfig{Topic: topic})
+				if s, ok := status.FromError(err); ok && s.Code() == codes.AlreadyExists {
+					fmt.Println("subscription already exists")
+					continue
+				}
+				if err != nil {
+					fmt.Println("error creating subscription", t)
+					return err
+				}
+				fmt.Println("created subscription:", subscription.String())
+			}
+		}
 	}
 	return nil
 }
