@@ -1,12 +1,15 @@
 package pubsub
 
 import (
-	"cloud.google.com/go/pubsub"
 	"errors"
 	"fmt"
+
+	"cloud.google.com/go/pubsub"
 	"github.com/jimmykodes/gommand"
 	"github.com/jimmykodes/gommand/flags"
 	"google.golang.org/api/iterator"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 var (
@@ -51,6 +54,10 @@ func createSubscriptions(ctx *gommand.Context, client *pubsub.Client) error {
 
 	for _, t := range ctx.Args() {
 		subscription, err := client.CreateSubscription(ctx, t, pubsub.SubscriptionConfig{Topic: topic})
+		if s, ok := status.FromError(err); ok && s.Code() == codes.AlreadyExists {
+			fmt.Println("subscription already exists")
+			continue
+		}
 		if err != nil {
 			fmt.Println("error creating subscription", t)
 			return err
